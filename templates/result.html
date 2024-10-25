@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Price Prediction Result</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --dark-bg: #222831;
+        --dark-text: #eeeeee;
+        --dark-accent: #393e46;
+        --dark-accent-2: #454c59;
+        --light-bg: #f5efed;
+        --light-text: #2c2928;
+        --light-accent: #dccdca;
+        --light-accent-2: #ebe2e0;
+        --primary-color: #00adb5;
+        --secondary-color: #ea8d8d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--light-bg),
+          var(--light-accent)
+        );
+        color: var(--light-text);
+      }
+
+      body.dark-mode {
+        background: linear-gradient(135deg, var(--dark-bg), var(--dark-accent));
+        color: var(--dark-text);
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 1;
+      }
+
+      .result {
+        text-align: center;
+        margin-top: 2rem;
+        padding: 2rem;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 2;
+        transition: transform 0.3s;
+      }
+
+      .result:before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border-radius: 24px;
+        z-index: -1;
+        opacity: 0.8;
+        filter: blur(20px);
+      }
+
+      .result:hover {
+        transform: scale(1.02);
+      }
+
+      body.dark-mode .result {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .result h2 {
+        font-size: 2rem;
+        color: var(--primary-color);
+        text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1rem;
+      }
+
+      .result p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .result-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .result-detail {
+        background-color: var(--light-accent-2);
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: left;
+      }
+
+      body.dark-mode .result-detail {
+        background-color: var(--dark-accent);
+      }
+
+      .result-detail strong {
+        color: var(--primary-color);
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 3;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .theme-toggle input {
+        display: none;
+      }
+
+      .theme-toggle-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .theme-toggle-icon {
+        font-size: 1.5rem;
+        margin-left: 8px;
+        transition: transform 0.3s;
+      }
+
+      body.dark-mode .theme-toggle-icon {
+        color: var(--dark-text);
+      }
+
+      body:not(.dark-mode) .theme-toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .floating-icon {
+        position: absolute;
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.2);
+        animation: float 5s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .result {
+          padding: 1.5rem;
+        }
+
+        .floating-icon {
+          font-size: 2rem;
+        }
+      }
+
+      button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        background-color: var(--secondary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
+
+      button:hover {
+        background-color: #e47777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>TicketGenie Flight Price Prediction</h1>
+
+      <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch" />
+        <label for="theme-switch" class="theme-toggle-label">
+          <span>Toggle Theme</span>
+          <i class="fas fa-adjust theme-toggle-icon"></i>
+        </label>
+      </div>
+
+      <div class="result">
+        <h2>Your Predicted Flight Price</h2>
+        <p>
+          Behold, dear traveler! The TicketGenie has gazed into the swirling
+          mists of airline chaos and plucked forth a price prediction for your
+          journey.
+        </p>
+        <h2><i class="fas fa-dollar-sign"></i> {{ prediction }}</h2>
+        <div class="result-details">
+          <div class="result-detail">
+            <p><strong>Airline:</strong> {{ user_data['airline'] }}</p>
+            <p><strong>Flight:</strong> {{ user_data['flight'] }}</p>
+            <p><strong>From:</strong> {{ user_data['source_city'] }}</p>
+            <p><strong>To:</strong> {{ user_data['destination_city'] }}</p>
+            <p><strong>Departure:</strong> {{ user_data['departure_time'] }}</p>
+          </div>
+          <div class="result-detail">
+            <p><strong>Stops:</strong> {{ user_data['stops'] }}</p>
+            <p><strong>Arrival:</strong> {{ user_data['arrival_time'] }}</p>
+            <p><strong>Class:</strong> {{ user_data['class'] }}</p>
+            <p><strong>Duration:</strong> {{ user_data['duration'] }} hours</p>
+            <p>
+              <strong>Days Until Flight:</strong> {{ user_data['days_left'] }}
+            </p>
+          </div>
+        </div>
+        <button onclick="window.history.back()">Try Another Prediction</button>
+      </div>
+
+      <i class="fas fa-plane floating-icon"></i>
+    </div>
+
+    <script>
+      const themeSwitch = document.getElementById("theme-switch");
+      const body = document.body;
+
+      themeSwitch.addEventListener("change", function () {
+        body.classList.toggle("dark-mode");
+      });
+
+      const floatingIcon = document.querySelector(".floating-icon");
+      const containerWidth = document.querySelector(".container").clientWidth;
+      const containerHeight = document.querySelector(".container").clientHeight;
+
+      let x = Math.random() * (containerWidth - 100);
+      let y = Math.random() * (containerHeight - 100);
+      let speedX = (Math.random() - 0.5) * 2;
+      let speedY = (Math.random() - 0.5) * 2;
+
+      function animateIcon() {
+        x += speedX;
+        y += speedY;
+
+        if (x < 0 || x > containerWidth - 100) {
+          speedX *= -1;
+        }
+
+        if (y < 0 || y > containerHeight - 100) {
+          speedY *= -1;
+        }
+
+        floatingIcon.style.left = x + "px";
+        floatingIcon.style.top = y + "px";
+        requestAnimationFrame(animateIcon);
+      }
+
+      animateIcon();
+    </script>
+  </body>
+</html>

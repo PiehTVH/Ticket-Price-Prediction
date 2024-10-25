@@ -1,0 +1,414 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --dark-bg: #222831;
+  --dark-text: #EEEEEE;
+  --dark-accent: #393E46;
+  --dark-accent-2: #454c59;
+  --light-bg: #f5efed;
+  --light-text: #2c2928;
+  --light-accent: #dccdca;
+  --light-accent-2: #ebe2e0;
+  --primary-color: #00ADB5;
+  --secondary-color: #EA8D8D;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, var(--light-bg), var(--light-accent));
+  color: var(--light-text);
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, var(--dark-bg), var(--dark-accent));
+  color: var(--dark-text);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+form {
+  display: grid;
+  grid-gap: 1.5rem;
+  background-color: var(--light-accent-2);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s;
+}
+
+form:before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 24px;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(20px);
+}
+
+form:hover {
+  transform: scale(1.02);
+}
+
+body.dark-mode form {
+  background-color: var(--dark-accent);
+}
+
+.form-group {
+  display: grid;
+  grid-gap: 0.5rem;
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+select, input[type="number"] {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--light-accent);
+  border-radius: 8px;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+}
+
+body.dark-mode select,
+body.dark-mode input[type="number"] {
+  border-color: var(--dark-accent-2);
+  background-color: var(--dark-accent-2);
+  color: var(--dark-text);
+}
+
+input[type="submit"] {
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #e47777;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 3;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle input {
+  display: none;
+}
+
+.theme-toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-toggle-icon {
+  font-size: 1.5rem;
+  margin-left: 8px;
+  transition: transform 0.3s;
+}
+
+body.dark-mode .theme-toggle-icon {
+  color: var(--dark-text);
+}
+
+body:not(.dark-mode) .theme-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.result {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.result h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.result p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.2);
+  animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.time-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.time-toggle input[type="radio"] {
+  display: none;
+}
+
+.time-toggle label {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: var(--light-accent-2);
+  color: var(--light-text);
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.time-toggle input[type="radio"]:checked + label {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+body.dark-mode .time-toggle label {
+  background-color: var(--dark-accent);
+  color: var(--dark-text);
+}
+
+body.dark-mode .time-toggle input[type="radio"]:checked + label {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    grid-gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .floating-icon {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>TicketGenie Flight Price Prediction</h1>
+
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switch">
+    <label for="theme-switch" class="theme-toggle-label">
+      <span>Toggle Theme</span>
+      <i class="fas fa-adjust theme-toggle-icon"></i>
+    </label>
+  </div>
+
+  <form action="/predict" method="POST">
+    <div class="form-group">
+      <label for="airline"><i class="fas fa-plane"></i> Airline:</label>
+      <select id="airline" name="airline" required>
+        <option value="" disabled selected>Select Airline</option>
+        <option value="SpiceJet">SpiceJet</option>
+        <option value="AirAsia">AirAsia</option>
+        <option value="Vistara">Vistara</option>
+        <option value="Air_India">Air India</option>
+        <option value="Indigo">Indigo</option>
+        <option value="GO_FIRST">GO FIRST</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="flight"><i class="fas fa-ticket-alt"></i> Flight:</label>
+      <select id="flight" name="flight" required>
+        <option value="" disabled selected>Select Flight</option>
+        <option value="SG-8709">SG-8709</option>
+        <option value="SG-8157">SG-8157</option>
+        <option value="I5-764">I5-764</option>
+        <option value="6E-7127">6E-7127</option>
+        <option value="6E-725">6E-725</option>
+        <option value="AI-433">AI-433</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="source_city"><i class="fas fa-map-marker-alt"></i> From:</label>
+      <select id="source_city" name="source_city" required>
+        <option value="" disabled selected>Select Source City</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="destination_city"><i class="fas fa-map-marker-alt"></i> To:</label>
+      <select id="destination_city" name="destination_city" required>
+        <option value="" disabled selected>Select Destination City</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Chennai">Chennai</option>
+        <option value="Delhi">Delhi</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="departure_time"><i class="far fa-clock"></i> Departure Time:</label>
+      <select id="departure_time" name="departure_time" required>
+        <option value="" disabled selected>Select Departure Time</option>
+        <option value="Evening">Evening</option>
+        <option value="Early_Morning">Early Morning</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Night">Night</option>
+        <option value="Late_Night">Late Night</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="stops"><i class="fas fa-map-signs"></i> Stops:</label>
+      <div class="time-toggle">
+        <input type="radio" id="zero" name="stops" value="zero" required>
+        <label for="zero">Zero</label>
+        <input type="radio" id="one" name="stops" value="one">
+        <label for="one">One</label>
+        <input type="radio" id="two_or_more" name="stops" value="two_or_more">
+        <label for="two_or_more">Two or More</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="arrival_time"><i class="far fa-clock"></i> Arrival Time:</label>
+      <div class="time-toggle">
+        <input type="radio" id="night" name="arrival_time" value="Night" required>
+        <label for="night">Night</label>
+        <input type="radio" id="morning" name="arrival_time" value="Morning">
+        <label for="morning">Morning</label>
+        <input type="radio" id="early_morning" name="arrival_time" value="Early_Morning">
+        <label for="early_morning">Early Morning</label>
+        <input type="radio" id="afternoon" name="arrival_time" value="Afternoon">
+        <label for="afternoon">Afternoon</label>
+        <input type="radio" id="evening" name="arrival_time" value="Evening">
+        <label for="evening">Evening</label>
+        <input type="radio" id="late_night" name="arrival_time" value="Late_Night">
+        <label for="late_night">Late Night</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="class"><i class="fas fa-chair"></i> Class:</label>
+      <select id="class" name="class" required>
+        <option value="" disabled selected>Select Class</option>
+        <option value="Economy">Economy</option>
+        <option value="Business">Business</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="duration"><i class="far fa-hourglass"></i> Duration (hours):</label>
+      <input type="number" step="0.1" id="duration" name="duration" required>
+    </div>
+    <div class="form-group">
+      <label for="days_left"><i class="far fa-calendar-alt"></i> Days Until Flight:</label>
+      <input type="number" id="days_left" name="days_left" required>
+    </div>
+
+    <input type="submit" value="Predict Price">
+  </form>
+
+
+<script>
+const themeSwitch = document.getElementById('theme-switch');
+const body = document.body;
+
+themeSwitch.addEventListener('change', function() {
+  body.classList.toggle('dark-mode');
+});
+
+const floatingIcon = document.querySelector('.floating-icon');
+const containerWidth = document.querySelector('.container').clientWidth;
+const containerHeight = document.querySelector('.container').clientHeight;
+
+let x = Math.random() * (containerWidth - 100);
+let y = Math.random() * (containerHeight - 100);
+let speedX = (Math.random() - 0.5) * 2;
+let speedY = (Math.random() - 0.5) * 2;
+
+function animateIcon() {
+  x += speedX;
+  y += speedY;
+
+  if (x < 0 || x > containerWidth - 100) {
+    speedX *= -1;
+  }
+
+  if (y < 0 || y > containerHeight - 100) {
+    speedY *= -1;
+  }
+
+  floatingIcon.style.left = x + 'px';
+  floatingIcon.style.top = y + 'px';
+  requestAnimationFrame(animateIcon);
+}
+
+animateIcon();
+</script>
+</body>
+</html>

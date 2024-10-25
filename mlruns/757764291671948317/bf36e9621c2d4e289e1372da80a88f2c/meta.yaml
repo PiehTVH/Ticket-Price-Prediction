@@ -1,0 +1,15 @@
+artifact_uri: file:///home/hiep/Downloads/Learn-all/django/event-steamer/data-pipeline/Flight-price-prediction/mlruns/757764291671948317/bf36e9621c2d4e289e1372da80a88f2c/artifacts
+end_time: 1729873790387
+entry_point_name: ''
+experiment_id: '757764291671948317'
+lifecycle_stage: active
+run_id: bf36e9621c2d4e289e1372da80a88f2c
+run_name: nimble-hawk-441
+run_uuid: bf36e9621c2d4e289e1372da80a88f2c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729873769908
+status: 3
+tags: []
+user_id: hiep

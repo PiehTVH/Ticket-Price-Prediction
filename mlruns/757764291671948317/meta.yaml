@@ -1,0 +1,6 @@
+artifact_location: file:///home/hiep/Downloads/Learn-all/django/event-steamer/data-pipeline/Flight-price-prediction/mlruns/757764291671948317
+creation_time: 1729873405283
+experiment_id: '757764291671948317'
+last_update_time: 1729873405283
+lifecycle_stage: active
+name: Flight Ticket Predication Model

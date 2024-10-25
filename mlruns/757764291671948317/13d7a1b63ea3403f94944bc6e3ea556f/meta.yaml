@@ -1,0 +1,15 @@
+artifact_uri: file:///home/hiep/Downloads/Learn-all/django/event-steamer/data-pipeline/Flight-price-prediction/mlruns/757764291671948317/13d7a1b63ea3403f94944bc6e3ea556f/artifacts
+end_time: 1729873740190
+entry_point_name: ''
+experiment_id: '757764291671948317'
+lifecycle_stage: active
+run_id: 13d7a1b63ea3403f94944bc6e3ea556f
+run_name: fun-doe-551
+run_uuid: 13d7a1b63ea3403f94944bc6e3ea556f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729873739836
+status: 3
+tags: []
+user_id: hiep

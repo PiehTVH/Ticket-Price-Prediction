@@ -1,0 +1,15 @@
+artifact_uri: file:///home/hiep/Downloads/Learn-all/django/event-steamer/data-pipeline/Flight-price-prediction/mlruns/757764291671948317/6364894ba8cd4629938656e64bf42453/artifacts
+end_time: 1729873745979
+entry_point_name: ''
+experiment_id: '757764291671948317'
+lifecycle_stage: active
+run_id: 6364894ba8cd4629938656e64bf42453
+run_name: dapper-hound-792
+run_uuid: 6364894ba8cd4629938656e64bf42453
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1729873745663
+status: 3
+tags: []
+user_id: hiep
